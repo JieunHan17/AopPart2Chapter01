@@ -1,5 +1,6 @@
 package fastcampus.aop_part2_chapter01
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,11 +20,16 @@ class MainActivity : AppCompatActivity() {
 
         resultButton.setOnClickListener {
             if (heightEditText.text.isEmpty() || weightEditText.text.isEmpty()) {
-                Toast.makeText(this, "빈 칸의 있습니다", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "빈 칸이 있습니다", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val height: Int = heightEditText.text.toString().toInt()
             val weight: Int = weightEditText.text.toString().toInt()
+
+            val intent = Intent(this, ResultActivity::class.java)
+            intent.putExtra("height", height)
+            intent.putExtra("weight", weight)
+            startActivity(intent)
         }
     }
 }
